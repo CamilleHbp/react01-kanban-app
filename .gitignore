@@ -3,4 +3,5 @@ build/
 coverage/
 .eslintcache
 npm-debug.log
+.vscode
 
