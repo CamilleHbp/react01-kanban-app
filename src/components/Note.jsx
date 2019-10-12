@@ -1,10 +1,10 @@
 import React from 'react';
 import './Note.scss';
 
-function Note({ task, onDelete }) {
+function Note({ children, onClick, onDelete }) {
   return (
-    <div>
-      <span>{task}</span>
+    <div onClick={onClick}>
+      {children}
       <button className="note-delete" onClick={onDelete}>
         x
       </button>
