@@ -28,11 +28,17 @@ function App() {
     ]);
   };
 
-  console.log(notes);
+  const deleteNote = (id, e) => {
+    // Avoid bubbling to edit
+    e.stopPropagation();
+
+    setNotes(notes.filter(note => note.id !== id));
+  };
+
   return (
     <div className="App">
       <button onClick={() => addNote('New task')}>+</button>
-      <Notes notes={notes} />
+      <Notes notes={notes} onDelete={deleteNote} />
     </div>
   );
 }

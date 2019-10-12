@@ -1,11 +1,14 @@
 import React from 'react';
+import Note from './Note';
 
-function Notes(props) {
-  const { notes } = props;
+// We provide an empty default delete function
+function Notes({ notes, onDelete = () => {} }) {
   return (
     <ul>
-      {notes.map(note => (
-        <li key={note.id}>{note.task}</li>
+      {notes.map(({ id, task }) => (
+        <li key={id}>
+          <Note task={task} onDelete={onDelete.bind(null, id)} />
+        </li>
       ))}
     </ul>
   );
