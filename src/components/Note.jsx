@@ -3,7 +3,7 @@ import './Note.scss';
 
 function Note({ children, onClick, onDelete }) {
   return (
-    <div onClick={onClick}>
+    <div className="note" onClick={onClick}>
       {children}
       <button className="note-delete" onClick={onDelete}>
         x

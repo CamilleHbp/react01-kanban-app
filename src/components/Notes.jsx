@@ -1,6 +1,7 @@
 import React from 'react';
 import Note from './Note';
 import Editable from './Editable';
+import './Notes.scss';
 
 // We provide an empty default delete function
 function Notes({
@@ -10,7 +11,7 @@ function Notes({
   onNoteClick = () => {}
 }) {
   return (
-    <ul>
+    <ul className="notes">
       {notes.map(({ id, editing, task }) => (
         <li key={id}>
           <Note

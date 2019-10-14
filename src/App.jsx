@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import uuid from 'uuid';
-import Notes from './components/Notes';
+import Notes from 'components/Notes';
+import AddNote from 'components/AddNote';
 import './App.scss';
 
 function App() {
@@ -20,7 +21,9 @@ function App() {
 
   const [notes, setNotes] = useState(initialNotes);
 
-  const handleAddNote = task => {
+  const handleAddNote = (task, e) => {
+    e.stopPropagation();
+
     setNotes([
       ...notes,
       {
@@ -72,7 +75,7 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={() => handleAddNote('Edit me')}>+</button>
+      <AddNote onAdd={handleAddNote} />
       <Notes
         notes={notes}
         onDelete={handleDeleteNote}
