@@ -2,26 +2,30 @@ import React from 'react';
 import Note from './Note';
 import Editable from './Editable';
 import './Notes.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteNote, editNote, updateNote } from 'store/noteActions';
 
 // We provide an empty default delete function
-function Notes({
-  notes,
-  onDelete = () => {},
-  onEdit = () => {},
-  onNoteClick = () => {}
-}) {
+function Notes() {
+  const notes = useSelector(store => store);
+  const dispatch = useDispatch();
+
+  const handleUpdateNote = (id, task) => {
+    dispatch(updateNote(id, task));
+  };
+
   return (
     <ul className="notes">
       {notes.map(({ id, editing, task }) => (
         <li key={id}>
           <Note
-            onClick={onNoteClick.bind(null, id)}
-            onDelete={onDelete.bind(null, id)}
+            onClick={() => dispatch(editNote(id))}
+            onDelete={() => dispatch(deleteNote(id))}
           >
             <Editable
               editing={editing}
               value={task}
-              onEdit={onEdit.bind(null, id)}
+              onEdit={handleUpdateNote.bind(null, id)}
             />
           </Note>
         </li>

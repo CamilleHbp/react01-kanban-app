@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import uuid from 'uuid';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import noteReducer from 'store/noteReducer';
 import Notes from 'components/Notes';
 import AddNote from 'components/AddNote';
 import './App.scss';
 
 function App() {
-  // Declare a new state variable using React { useState } Hook
-  const initialNotes = [
+  // Initial notes
+  const initialState = [
     {
       id: uuid.v4(),
       editing: false,
@@ -19,70 +22,13 @@ function App() {
     }
   ];
 
-  const [notes, setNotes] = useState(initialNotes);
-
-  const handleAddNote = (task, e) => {
-    e.stopPropagation();
-
-    setNotes([
-      ...notes,
-      {
-        id: uuid.v4(),
-        editing: false,
-        task: task
-      }
-    ]);
-  };
-
-  const handleDeleteNote = (id, e) => {
-    // Avoid bubbling to edit
-    e.stopPropagation();
-
-    console.log('onDeleteNote');
-    setNotes(notes.filter(note => note.id !== id));
-  };
-
-  const handleEditNote = (id, value, e) => {
-    // Avoid bubbling to edit
-    e.stopPropagation();
-
-    console.log('onEditNote');
-    setNotes(
-      notes.map(note => {
-        if (note.id === id) {
-          note.editing = false;
-          note.task = value;
-        }
-        return note;
-      })
-    );
-  };
-
-  const handleClickNote = (id, e) => {
-    // Avoid bubbling to edit
-    e.stopPropagation();
-
-    console.log('onClickNote');
-    setNotes(
-      notes.map(note => {
-        if (note.id === id) {
-          note.editing = true;
-        }
-        return note;
-      })
-    );
-  };
+  const store = createStore(noteReducer, initialState);
 
   return (
-    <div className="App">
-      <AddNote onAdd={handleAddNote} />
-      <Notes
-        notes={notes}
-        onDelete={handleDeleteNote}
-        onEdit={handleEditNote}
-        onNoteClick={handleClickNote}
-      />
-    </div>
+    <Provider store={store}>
+      <AddNote />
+      <Notes />
+    </Provider>
   );
 }
 
