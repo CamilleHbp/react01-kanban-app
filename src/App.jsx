@@ -1,28 +1,20 @@
 import React from 'react';
-import uuid from 'uuid';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import noteReducer from 'store/noteReducer';
 import Notes from 'components/Notes';
 import AddNote from 'components/AddNote';
+import noteReducer from 'store/noteReducer';
+import { loadState, saveState } from 'store/localStorage';
 import './App.scss';
 
 function App() {
   // Initial notes
-  const initialState = [
-    {
-      id: uuid.v4(),
-      editing: false,
-      task: 'Learn React'
-    },
-    {
-      id: uuid.v4(),
-      editing: false,
-      task: 'Do laundry'
-    }
-  ];
+  const initialState = loadState();
 
   const store = createStore(noteReducer, initialState);
+  store.subscribe(() => {
+    saveState(store.getState());
+  });
 
   return (
     <Provider store={store}>
