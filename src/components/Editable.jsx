@@ -27,13 +27,22 @@ const Edit = ({ className, value, onEdit = () => {} }) => {
   );
 };
 
-const Display = ({ value }) => <span>{value}</span>;
+const Display = ({ value, onClick = () => {} }) => (
+  <span onClick={onClick}>{value}</span>
+);
 
-function Editable({ editing, value, onEdit = () => {} }) {
+function Editable({
+  editing,
+  value,
+  onDisplayClick = () => {},
+  onEdit = () => {}
+}) {
   if (editing) {
     return <Edit className="editable" onEdit={onEdit} value={value} />;
   }
-  return <Display className="editable" value={value} />;
+  return (
+    <Display className="editable" onClick={onDisplayClick} value={value} />
+  );
 }
 
 export default Editable;

@@ -1,11 +1,13 @@
-export const ADD_NOTE = 'ADD_NOTE';
+import uuid from 'uuid';
+export const CREATE_NOTE = 'ADD_NOTE';
 export const DELETE_NOTE = 'DELETE_NOTE';
-export const EDIT_NOTE = 'EDIT_NOTE';
-export const UPDATE_NOTE = 'UPDATE_NOTE';
+export const START_EDIT_NOTE = 'EDIT_NOTE';
+export const FINISH_EDIT_NOTE = 'UPDATE_NOTE';
 
-export const addNote = task => ({
-  type: ADD_NOTE,
-  content: task
+export const createNote = content => ({
+  type: CREATE_NOTE,
+  id: uuid.v4(),
+  content: content
 });
 
 export const deleteNote = id => ({
@@ -13,15 +15,20 @@ export const deleteNote = id => ({
   id: id
 });
 
-export const editNote = id => ({
-  type: EDIT_NOTE,
+export const startEditNote = id => ({
+  type: START_EDIT_NOTE,
   id: id
 });
 
-export const updateNote = (id, task) => ({
-  type: UPDATE_NOTE,
+export const finishEditNote = (id, content) => ({
+  type: FINISH_EDIT_NOTE,
   id: id,
-  content: task
+  content: content
 });
 
-export default { addNote, deleteNote, editNote, updateNote };
+export default {
+  createNote,
+  deleteNote,
+  startEditNote,
+  finishEditNote
+};

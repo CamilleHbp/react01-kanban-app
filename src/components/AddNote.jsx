@@ -1,11 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { addNote } from 'store/noteActions';
+import { createNote } from 'store/noteActions';
 
-function AddNote({ onAdd = () => {} }) {
+function AddNote() {
   const dispatch = useDispatch();
   return (
-    <button className="add-note" onClick={() => dispatch(addNote('Edit me'))}>
+    <button
+      className="add-note"
+      onClick={() => dispatch(createNote('Edit me'))}
+    >
       +
     </button>
   );

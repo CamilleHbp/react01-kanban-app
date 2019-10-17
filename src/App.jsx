@@ -1,9 +1,9 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import Notes from 'components/Notes';
+import NoteList from 'components/NoteList';
 import AddNote from 'components/AddNote';
-import noteReducer from 'store/noteReducer';
+import combinedReducer from 'store/combinedReducer';
 import { loadState, saveState } from 'store/localStorage';
 import './App.scss';
 
@@ -11,7 +11,7 @@ function App() {
   // Initial notes
   const initialState = loadState();
 
-  const store = createStore(noteReducer, initialState);
+  const store = createStore(combinedReducer, initialState);
   store.subscribe(() => {
     saveState(store.getState());
   });
@@ -19,7 +19,7 @@ function App() {
   return (
     <Provider store={store}>
       <AddNote />
-      <Notes />
+      <NoteList />
     </Provider>
   );
 }
