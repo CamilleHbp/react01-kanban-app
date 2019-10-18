@@ -3,7 +3,8 @@ import {
   CREATE_LANE,
   DELETE_LANE,
   DETACH_FROM_LANE,
-  UPDATE_LANE
+  START_EDIT_LANE,
+  FINISH_EDIT_LANE
 } from 'store/laneActions';
 import { combineReducers } from 'redux';
 
@@ -12,23 +13,32 @@ function lane(state, action) {
     case ATTACH_TO_LANE:
       if (state.id === action.id) {
         state.notes = [...state.notes, action.noteId];
+      } else {
+        console.warn('Could not attacht to lane: ' + action.id);
       }
       return state;
     case CREATE_LANE:
       return {
         id: action.id,
+        editing: false,
         title: action.title,
         notes: []
       };
     case DETACH_FROM_LANE:
-      console.log('Detach laneID: ' + action.id);
-      console.log('Detach noteID: ' + action.noteId);
       if (state.id === action.id) {
         state.notes = state.notes.filter(id => id !== action.noteId);
+      } else {
+        console.warn('Could not detach from lane: ' + action.id);
       }
       return state;
-    case UPDATE_LANE:
+    case START_EDIT_LANE:
       if (state.id === action.id) {
+        state.editing = true;
+      }
+      return state;
+    case FINISH_EDIT_LANE:
+      if (state.id === action.id) {
+        state.editing = false;
         state.title = action.title;
       }
       return state;
@@ -42,7 +52,8 @@ function byId(state = {}, action) {
     case ATTACH_TO_LANE:
     case CREATE_LANE:
     case DETACH_FROM_LANE:
-    case UPDATE_LANE:
+    case START_EDIT_LANE:
+    case FINISH_EDIT_LANE:
       return {
         ...state,
         [action.id]: lane(state[action.id], action)

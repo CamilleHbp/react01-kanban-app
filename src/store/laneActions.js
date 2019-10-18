@@ -4,7 +4,8 @@ export const ATTACH_TO_LANE = 'ATTACH_TO_LANE';
 export const CREATE_LANE = 'CREATE_LANE';
 export const DELETE_LANE = 'DELETE_LANE';
 export const DETACH_FROM_LANE = 'DETACH_FROM_LANE';
-export const UPDATE_LANE = 'UPDATE_LANE';
+export const START_EDIT_LANE = 'START_EDIT_LANE';
+export const FINISH_EDIT_LANE = 'FINISH_EDIT_LANE';
 
 export const attachToLane = (laneId, noteId) => ({
   type: ATTACH_TO_LANE,
@@ -29,8 +30,13 @@ export const detachFromLane = (laneId, noteId) => ({
   noteId: noteId
 });
 
-export const updateLane = (id, title) => ({
-  type: UPDATE_LANE,
+export const startEditLane = id => ({
+  type: START_EDIT_LANE,
+  id: id
+});
+
+export const finishEditLane = (id, title) => ({
+  type: FINISH_EDIT_LANE,
   id: id,
   title: title
 });
@@ -40,5 +46,6 @@ export default {
   createLane,
   deleteLane,
   detachFromLane,
-  updateLane
+  startEditLane,
+  finishEditLane
 };

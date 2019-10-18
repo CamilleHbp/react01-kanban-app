@@ -17,7 +17,6 @@ import {
 function note(state, action) {
   switch (action.type) {
     case CREATE_NOTE:
-      console.log('Note ID: ' + action.id);
       return {
         id: action.id,
         editing: false,
