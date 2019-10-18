@@ -79,15 +79,9 @@ function allIds(state = [], action) {
 
 export const getLanesArray = state => state.allIds.map(id => state.byId[id]);
 export const getLaneNoteIdArray = (state, laneId) => {
+  console.log('State: ' + state);
+  console.log('NOTES: ' + state.byId[laneId].notes);
   return state.byId[laneId].notes;
-  // const noteAllIds = state.byId;
-  // const noteFilter = noteAllIds.filter(note => note.lane === laneId);
-  // const noteMap = noteFilter.map(id => state.byId[id]);
-  // console.log('Lane ID: ' + laneId);
-  // console.log('Lane AllIds: ' + noteAllIds);
-  // console.log('Filter: ' + noteFilter);
-  // console.log('Map: ' + noteMap);
-  // return noteMap;
 };
 
 export const laneReducer = combineReducers({ byId, allIds });
