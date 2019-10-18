@@ -1,9 +1,9 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import NoteList from 'components/NoteList';
-import AddNote from 'components/AddNote';
+import AddLane from 'components/AddLane';
 import combinedReducer from 'store/combinedReducer';
+import LaneList from 'components/LaneList';
 import { loadState, saveState } from 'store/localStorage';
 import './App.scss';
 
@@ -18,8 +18,8 @@ function App() {
 
   return (
     <Provider store={store}>
-      <AddNote />
-      <NoteList />
+      <AddLane />
+      <LaneList />
     </Provider>
   );
 }

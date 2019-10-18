@@ -4,9 +4,10 @@ export const DELETE_NOTE = 'DELETE_NOTE';
 export const START_EDIT_NOTE = 'EDIT_NOTE';
 export const FINISH_EDIT_NOTE = 'UPDATE_NOTE';
 
-export const createNote = content => ({
+export const createNote = (id, laneId, content) => ({
   type: CREATE_NOTE,
-  id: uuid.v4(),
+  id: id,
+  lane: laneId,
   content: content
 });
 

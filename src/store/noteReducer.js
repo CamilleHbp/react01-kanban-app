@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import uuid from 'uuid';
 import {
   CREATE_NOTE,
   DELETE_NOTE,
@@ -18,13 +17,14 @@ import {
 function note(state, action) {
   switch (action.type) {
     case CREATE_NOTE:
+      console.log('Note ID: ' + action.id);
       return {
         id: action.id,
         editing: false,
+        lane: action.lane,
         content: action.content
       };
     case START_EDIT_NOTE:
-      console.log(state);
       if (state.id !== action.id) {
         return state;
       }
@@ -55,7 +55,6 @@ function byId(state = {}, action) {
         [action.id]: note(state[action.id], action)
       };
     case DELETE_NOTE:
-      console.log(action.id);
       delete state[action.id];
       return state;
     default:
@@ -82,8 +81,9 @@ export const noteReducer = combineReducers({ byId, allIds });
 /**
  * Returns all notes as an array instead of an object
  */
-export const getNotesArray = state => {
-  return state.allIds.map(id => state.byId[id]);
+export const getNoteArray = state => state.allIds.map(id => state.byId[id]);
+export const getLaneNoteArray = (state, noteIds) => {
+  return noteIds.map(id => state.byId[id]);
 };
 
-export default noteReducer;
+export default { noteReducer, getNoteArray };
