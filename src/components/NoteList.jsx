@@ -28,7 +28,7 @@ function NoteList({ laneId }) {
       {notes.map(({ id, lane, editing, content }) => {
         if (lane === laneId) {
           return (
-            <li key={id}>
+            <li className="notelist-item" key={id}>
               <Note onDelete={() => deleteNoteFromLane(dispatch, lane, id)}>
                 <Editable
                   editing={editing}

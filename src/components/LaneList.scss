@@ -1,0 +1,20 @@
+@import 'style/Palette.scss';
+
+.lanelist {
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 0.5rem;
+  padding-left: 0;
+
+  overflow: auto;
+  list-style: none;
+  height: 100%;
+}
+
+.lanelist-item {
+  flex-basis: 200px;
+  flex-shrink: 0;
+  margin: 1rem;
+  max-height: 100%;
+  height: auto;
+}

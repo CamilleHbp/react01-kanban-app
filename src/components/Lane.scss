@@ -1,6 +1,7 @@
 @import 'style/Palette.scss';
 
 .lane {
+  flex: 1 0 200px;
   overflow: auto;
 
   margin-bottom: 0.5em;

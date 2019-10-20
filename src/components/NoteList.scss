@@ -1,9 +1,15 @@
 @import 'style/Palette.scss';
 
 .notelist {
-  margin: 0.5rem;
-  padding-left: 0;
+  margin: 0;
+  padding: 0;
 
-  max-width: 20rem;
+  background: $note-background;
+
+  overflow: auto;
   list-style: none;
+}
+
+.notelist-item {
+  margin: 1rem;
 }

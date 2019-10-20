@@ -18,8 +18,15 @@ function App() {
 
   return (
     <Provider store={store}>
-      <AddLane />
-      <LaneList />
+      <div className="app">
+        <div className="kanban-header">
+          <AddLane />
+          <span>Add a lane</span>
+        </div>
+        <div className="kanban-board">
+          <LaneList />
+        </div>
+      </div>
     </Provider>
   );
 }

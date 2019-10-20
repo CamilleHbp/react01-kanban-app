@@ -8,6 +8,7 @@ import { startEditLane, finishEditLane, deleteLane } from 'store/laneActions';
 import { getLanesArray, getLaneNoteIdArray } from 'store/laneReducer';
 import { getLaneNoteArray } from 'store/noteReducer';
 import { deleteNote } from 'store/noteActions';
+import './LaneList.scss';
 
 export function LaneList() {
   const lanesIds = useSelector(store => getLanesArray(store.lanes));
@@ -34,7 +35,7 @@ export function LaneList() {
     <ul className="lanelist">
       {lanesIds.map(({ id, editing, title }) => {
         return (
-          <li key={id}>
+          <li className="lanelist-item" key={id}>
             <Lane onDelete={handleDeleteLane.bind(null, id)}>
               <Editable
                 editing={editing}
